@@ -1,0 +1,286 @@
+#coding: utf-8
+#:import hex kivy.utils.get_color_from_hex
+#:set cor_verde "#008C8C"
+#:set cor_azul "00a2e8"
+
+#:include popup_key.kv
+#:include popup_apk.kv
+
+<Main>:
+    Menu:
+    CreateKeystore:
+
+
+
+    
+<Menu@Screen>:
+    name: 'menu'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: hex(cor_azul)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+
+        orientation:"vertical"
+
+        GridLayout:
+            cols:3
+            size_hint_y: .25
+            padding:15
+            spacing:03
+            
+
+            #orientation:"vertical"
+            Label:
+                halign: "left"
+                valign: "center"
+                texture_size: self.size
+                text_size: self.texture_size
+                text: "Path keystore:\n"+app.keypath
+
+
+            Label:
+                halign: "left"
+                valign: "center"
+                texture_size: self.size
+                text_size: self.texture_size
+                text: "Path Ndk:\n"+app.path_ndk
+
+
+            Label:
+                halign: "left"
+                valign: "center"
+                texture_size: self.size
+                text_size: self.texture_size
+                text: "Path apktool:\n"+app.path_apktool
+
+
+
+
+
+
+
+            Label:
+                halign: "left"
+                valign: "center"
+                texture_size: self.size
+                text_size: self.texture_size
+                text: "Path project:\n"+app.path_project
+
+            Label:
+                halign: "left"
+                valign: "center"
+                texture_size: self.size
+                text_size: self.texture_size
+                text: "Path apk's:\n"+app.path_apk
+
+            Label:
+                text:
+
+
+
+
+            #extInput:
+                #t#ext: app.caminho_keystore
+
+
+
+
+
+        BoxCor_1:
+            orientation: "vertical"
+            size_hint_y: .65
+            padding:8
+            spacing:5
+
+
+            Button:
+                text:"CREATE APK"
+                on_release:
+
+
+                    app.root.cria_popup_apk(x ="")
+
+
+
+
+            Button:
+                text:"CREATE OR CONFIGURE KEYSTORE"
+                on_release:
+
+
+                    app.root.cria_popup_senha(x ="")
+
+            Button:
+                text:"CONFIGURE API SDK and NDK"
+                on_release:
+                    app.root.cria_popup_aviso(x ="Em desenvolvimento.")
+
+
+
+            Button:
+                text:"CONFIGURE APKTOOL"
+                on_release:
+                    app.root.cria_popup_aviso(x ="Em desenvolvimento.")
+
+        
+
+            Button:
+                text:"CONFIGURE ALL PATHS"
+                on_release:
+                    app.root.cria_popup_aviso(x ="Em desenvolvimento.")
+
+
+
+            Button:
+                text:"CONFIGURE PYTHON VERSIONa"
+                on_release:
+                    app.root.cria_popup_aviso(x ="Em desenvolvimento.")
+
+
+
+        BoxCor_1:
+            padding:10
+            spacing:05
+            size_hint_y:.1
+            orientation: "horizontal"
+
+            Button:
+                text:"SAVE"
+
+
+            Button:
+                text:"EXIT"
+
+
+
+
+
+<CreateKeystore@Screen>:
+    name: 'create_keystore'
+
+    BoxCor_1:
+        orientation:"vertical"
+
+        BoxLayout:
+            orientation:"vertical"
+
+            Label:
+                text: "Caminho a ser utilizado"
+                halign: "left"
+                valign: "bottom"
+                text_size: self.size
+
+                font_size: "14sp"
+                color:hex(cor_azul)
+                canvas.before:
+                    Color:
+                        rgba: hex(cor_verde)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            TextInput:
+                text:"Caminho"
+
+
+        BoxLayout:
+            orientation:"horizontal"
+
+
+
+            Button:
+                text: "Gravar novo caminho"
+
+            Button:
+                text: "Criar keystore"
+                on_release:
+                    app.root.cria_popup_senha(x ="Em desenvolvimento.")
+
+
+
+
+
+
+
+
+
+BoxLayout
+    orientation:"vertical"
+
+
+    Button:
+        text:"Configurar keystore"
+
+    Label:
+        text: "Caminho onde o apktool será gravado"
+        size_hint_y:".1"
+
+    TextInput:
+
+        text:"/home/kivy/apktool"
+        size_hint_y:".1"
+
+    Button:
+
+
+
+
+
+
+<Lb_space@Label>:
+    size_hint_y:.1
+    #texture_size: self.size
+    #text_size: self.texture_size
+    color:hex("0a2e8")
+    font_size:"10dp"
+    #canvas.before:
+    #    Color:
+    #        rgba: hex(cor_azul)
+    #    Rectangle:
+    #        pos: self.pos
+    #        size: self.size
+
+
+
+
+<Lb_1@Label>:
+    #size_hint_y:.07
+    texture_size: self.size
+    text_size: self.texture_size
+    color:hex("ffffff")
+    #font_size:"10dp"
+    #canvas.before:
+    #    Color:
+    #        rgba: hex("ffffff")
+    #    Rectangle:
+    #        pos: self.pos
+    #        size: self.size
+
+
+
+<BoxCor_1@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: hex(cor_azul)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<BoxCor_2@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: hex(cor_azul)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<TextBase@TextInput>:
+    disabled: app.par_1
+    color:hex(app.par_2)
