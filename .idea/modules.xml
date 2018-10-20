@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/lancador.iml" filepath="$PROJECT_DIR$/.idea/lancador.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/launcherKivyAndroid.iml" filepath="$PROJECT_DIR$/.idea/launcherKivyAndroid.iml" />
     </modules>
   </component>
 </project>

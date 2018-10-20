@@ -29,20 +29,35 @@ class Lanca():
 
     def check_file_exists(self,tip, name, path):
         """
-
-
-        :param tip:
-        :param name:
-        :param path:
+        :param tip: dir or file
+        :param name: name file or = not_file
+        :param path: path
         :return:
-        """
-        pass
+                if self.m.check_file_exists("file", self.x_1, self.x_5  ) ==True:
+            print ("arquivo ja existe")
+
+
+        #chama classe externa
+        elif self.m.check_file_exists("file", self.x_1, self.x_5  ) ==False:
+            self.m = Lanca()
+            self.m.create_keystore(x , y)"""
+
+
+        self.name = name
+        self.path = path
+        if os.path.isfile(self.path + self.name):
+
+            return True
+
+        else:
+            return False
 
 
     def exe_linux(self,x):
         "cria comando para linux"
 
         os.system(x)
+
 
     def create_keystore(self, x , y):
         """recebe parametros e monta key conforme dados recebidos
@@ -61,11 +76,11 @@ class Lanca():
             ".keystore -alias " + self.alias + " -storepass " + self.storepass +
             " -keypass " + self.keypass + " -keyalg RSA -validity " + self.validity)
 
+        print (self.v)
 
-        self.p = pexpect.spawn(self.v, timeout=3)
+
+        self.p = pexpect.spawn(self.v, timeout=10)
         self.p.expect('What.*?')
-
-
         self.p.sendline("dddddddd")
         self.p.expect('What.*?')
         self.p.sendline("cccc")
@@ -103,14 +118,31 @@ class PopKey_1(BoxLayout):
     def __init__(self, **kwargs):
         super(PopKey_1, self).__init__(**kwargs)
 
-
     def clean(self):
         self.clear_widgets()
         self.add_widget(PopKey_2())
 
+    def clean_2(self):
+        self.clear_widgets()
+        self.add_widget(PopKey_3())
+
 
 class PopKey_2(BoxLayout):
-    pass
+    def __init__(self, **kwargs):
+        super(PopKey_2, self).__init__(**kwargs)
+
+    def clean_2(self,):
+        self.clear_widgets()
+        self.add_widget(PopKey_1())
+
+
+class PopKey_3(BoxLayout):
+    def __init__(self, **kwargs):
+        super(PopKey_3, self).__init__(**kwargs)
+
+    def clean(self,):
+        self.clear_widgets()
+        self.add_widget(PopKey_1())
 
 
 class PopKeyScreen(BoxLayout):
@@ -123,36 +155,45 @@ class Main(ScreenManager):
         super(Main, self).__init__(**kwargs)
 
 
-    def checa_key(self, x):
+    def checa_key(self,tip, name, path):
 
-        file_path = x
-        if os.path.isfile(file_path):
-            print ("tem sim porra")
+        self.m = Lanca()
+        self.x_1 = name + ".keystore"
+        self.x_5 = path
+
+        # verifica se key já existe no diretorio
+        if self.m.check_file_exists("file", self.x_1, self.x_5) == True:
             return True
 
-        else:
-            print("tem nao caraio")
+
+        # chama classe externa
+        elif self.m.check_file_exists("file", self.x_1, self.x_5) == False:
             return False
-
-
-        #for i in self.p.before == "main.kv":
-        #    print "tem porra"
-            #return True
 
 
 
     def create_key(self, x, y):
-        """recebe dados de popup_key.kv
+        """
+        recebe dados de popup_key.kv
         x = ['aliasname', 'namekey', 'stor183590', 'key183590', '14000', '/home/kivy/Desktop/']
         y = ['ailton', 'orgkivy', 'uniao kivy', 'sao paulo', 'sao paulo', 'br']
-        envia listas com dados da keystore"""
+        envia listas com dados da keystore
+        """
+        self.m = Lanca()
+        self.x_1 = x[1]+".keystore"
+        self.x_5 = x[5]
+
+
+        #verifica se key já existe no diretorio
+        if self.m.check_file_exists("file", self.x_1, self.x_5  ) ==True:
+            print ("arquivo ja existe")
 
 
         #chama classe externa
-        self.m = Lanca()
-
-        self.m.create_keystore(x , y)
-        print (self.m.create_keystore(x, y))
+        elif self.m.check_file_exists("file", self.x_1, self.x_5  ) ==False:
+            self.m = Lanca()
+            self.m.create_keystore(x , y)
+            #print (self.m.create_keystore(x, y))
 
 
     def cria_popup_senha(self,x):
@@ -177,18 +218,13 @@ class Main(ScreenManager):
 
 
     def cria_popup_apk(self,x):
-        #content = Button(text =x)
+
         self.popup_apk = PopKey(title="CREATE YOUR APK OR REPORT THE WAY", size_hint=(.7, .9),
                                    auto_dismiss=True,
                                    title_align="center",
                                    )
         self.pop_1 = PopApk()
         self.popup_apk.add_widget(self.pop_1)
-        #content.bind(on_press=self.popup_senha.dismiss)
-        #self.canvas.add(Color(1., 1., 0))
-        #self.canvas.add(Color(1., 1., 0))
-        #self.canvas.add(Rectangle(size=(50, 50)))
-        #self.popup_senha.add_widget(Main())
         self.popup_apk.open()
 
 
@@ -235,11 +271,13 @@ class Main(ScreenManager):
         if x == 2:
             self.popup_senha.dismiss()
 
+#screen
+
 
     def create_keystore(self):
         self.current = 'create_keystore'
 
-
+#screen
     def menu(self):
         self.current = 'menu'
 
@@ -248,11 +286,11 @@ class MainApp(App):
 
     #DADOS KEYSTORE
     alias = StringProperty("aliasname")
-    name_key = StringProperty("keystore")
+    name_key = StringProperty("")
     storepass = StringProperty("183590")
     keypass = StringProperty("183590")
     validity = StringProperty("10000")
-    keypath = StringProperty("/home/kivy/Desktop/helloword/keistores/")
+    keypath = StringProperty("/home/kivy/Desktop/helloword/keystores/")
 
     #pacote do projeto
     path_project = StringProperty("/home/kivy/Desktop/helloword/")

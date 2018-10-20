@@ -22,6 +22,7 @@
         #spacing:5
 
         Lb_1:
+            id:title_popup
             texture_size: self.size
             text_size: self.texture_size
             halign: "right"
@@ -149,13 +150,14 @@
         Button:
             text: "SAVE"
             on_release:
-
+                
                 app.par_creatkey =[str(alias.text), str(nome_key.text),
-                str(password_alias.text), str(password_key.text), str(validade.text), str(caminho_key.text)]
+                str(password_alias.text), str(password_key.text),
+                str(validade.text), str(caminho_key.text)]
 
-                #print app.par_creatkey
-                root.clean()
+                if app.root.checa_key("file",nome_key.text,caminho_key.text)== False:root.clean()
 
+                elif app.root.checa_key("file",nome_key.text,caminho_key.text)== True:root.clean_2()
 
 
 <PopKey_2>:
@@ -215,8 +217,9 @@
             orientation: "horizontal"
 
             Button:
-                text: "EXIT"
+                text: "RETURN"
                 on_release:
+                    root.clean_2()
                     #app.keypath = ("")
                     #app.alias = ("")
                     #app.name_key = ("")
@@ -234,9 +237,17 @@
                     str(enpres.text), str(city.text), str(municip.text),
                     str(pais.text)]
 
-                    #informa para função que cria a chave dados contidos em duas listas
-                    app.root.create_key(x = app.par_creatkey, y = app.data_key)
+                    #informa para função que cria a chave
+                    #dados contidos em duas listas
+                    app.root.create_key(x = app.par_creatkey,y = app.data_key)
 
                     #parametro bool para informar se chave foi gerada
                     app.keystore_ok = True
-                    app.root.pop_dism(x=2)
+                    #app.root.pop_dism(x=2)
+
+<PopKey_3>:
+    Button:
+        text:"THERE IS KEY WITH THAT NAME IN THE INFORMED DIRECTORY."
+        on_release:
+            root.clean()
+

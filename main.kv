@@ -11,8 +11,6 @@
     CreateKeystore:
 
 
-
-    
 <Menu@Screen>:
     name: 'menu'
     BoxLayout:
@@ -24,24 +22,19 @@
                 size: self.size
 
 
-
         orientation:"vertical"
-
         GridLayout:
             cols:3
             size_hint_y: .25
             padding:15
             spacing:03
-            
 
-            #orientation:"vertical"
             Label:
                 halign: "left"
                 valign: "center"
                 texture_size: self.size
                 text_size: self.texture_size
                 text: "Path keystore:\n"+app.keypath
-
 
             Label:
                 halign: "left"
@@ -57,12 +50,6 @@
                 texture_size: self.size
                 text_size: self.texture_size
                 text: "Path apktool:\n"+app.path_apktool
-
-
-
-
-
-
 
             Label:
                 halign: "left"
@@ -82,15 +69,6 @@
                 text:
 
 
-
-
-            #extInput:
-                #t#ext: app.caminho_keystore
-
-
-
-
-
         BoxCor_1:
             orientation: "vertical"
             size_hint_y: .65
@@ -101,18 +79,11 @@
             Button:
                 text:"CREATE APK"
                 on_release:
-
-
                     app.root.cria_popup_apk(x ="")
-
-
-
 
             Button:
                 text:"CREATE OR CONFIGURE KEYSTORE"
                 on_release:
-
-
                     app.root.cria_popup_senha(x ="")
 
             Button:
@@ -121,27 +92,22 @@
                     app.root.cria_popup_aviso(x ="Em desenvolvimento.")
 
 
-
             Button:
                 text:"CONFIGURE APKTOOL"
                 on_release:
                     app.root.cria_popup_aviso(x ="Em desenvolvimento.")
 
         
-
             Button:
                 text:"CONFIGURE ALL PATHS"
                 on_release:
                     app.root.cria_popup_aviso(x ="Em desenvolvimento.")
 
 
-
             Button:
                 text:"CONFIGURE PYTHON VERSIONa"
                 on_release:
                     app.root.cria_popup_aviso(x ="Em desenvolvimento.")
-
-
 
         BoxCor_1:
             padding:10
@@ -152,11 +118,8 @@
             Button:
                 text:"SAVE"
 
-
             Button:
                 text:"EXIT"
-
-
 
 
 
@@ -191,8 +154,6 @@
         BoxLayout:
             orientation:"horizontal"
 
-
-
             Button:
                 text: "Gravar novo caminho"
 
@@ -200,13 +161,6 @@
                 text: "Criar keystore"
                 on_release:
                     app.root.cria_popup_senha(x ="Em desenvolvimento.")
-
-
-
-
-
-
-
 
 
 BoxLayout
@@ -226,9 +180,6 @@ BoxLayout
         size_hint_y:".1"
 
     Button:
-
-
-
 
 
 
@@ -284,3 +235,7 @@ BoxLayout
 <TextBase@TextInput>:
     disabled: app.par_1
     color:hex(app.par_2)
+
+<BtKeyNotExist@Button>:
+    on_release:
+        root.root.clean_3()
