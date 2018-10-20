@@ -33,15 +33,7 @@ class Lanca():
         :param name: name file or = not_file
         :param path: path
         :return:
-                if self.m.check_file_exists("file", self.x_1, self.x_5  ) ==True:
-            print ("arquivo ja existe")
-
-
-        #chama classe externa
-        elif self.m.check_file_exists("file", self.x_1, self.x_5  ) ==False:
-            self.m = Lanca()
-            self.m.create_keystore(x , y)"""
-
+        """
 
         self.name = name
         self.path = path
