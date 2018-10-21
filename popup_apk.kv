@@ -7,8 +7,8 @@
     BoxLayout:
         size_hint_y: .3
         orientation: "vertical"
-        padding:05
-        spacing: 03
+        padding:.05
+        spacing: .03
         canvas.before:
 
 
@@ -24,6 +24,7 @@
         Label:
             text: "APPLICATION NAME TO BE WORKED"
         TextBase:
+            text: app.apk_name
             id:nome
             hint_text:"example: <myapp-0.1-release.apk>"
             disabled:False
@@ -34,12 +35,6 @@
         orientation: "vertical"
         padding:10
         spacing:10
-        canvas.before:
-        #    Color:
-        #        rgba: hex(cor_azul)
-        #    Rectangle:
-        #        pos: self.pos
-        #        size: self.size
 
 
         Button:
@@ -58,7 +53,7 @@
         Button:
             text:"APK RELEASE"
             on_release:
-                app.root.create_apk(x="release",  y= app.path_apk )
+                app.root.create_apk(type="release",  path_apk = app.path_apk, name_apk =app.apk_name, data_key = app.par_creatkey  )
 
 
 

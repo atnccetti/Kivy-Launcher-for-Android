@@ -22,12 +22,18 @@
                 size: self.size
 
 
+
+
         orientation:"vertical"
+
+        Label:
+            text: app.python_version
+            size_hint_y: .05
         GridLayout:
             cols:3
-            size_hint_y: .25
+            size_hint_y: .2
             padding:15
-            spacing:03
+            spacing:.03
 
             Label:
                 halign: "left"
@@ -66,8 +72,11 @@
                 text: "Path apk's:\n"+app.path_apk
 
             Label:
-                text:
-
+                halign: "left"
+                valign: "center"
+                texture_size: self.size
+                text_size: self.texture_size
+                text: "Name apk:\n"+app.apk_name
 
         BoxCor_1:
             orientation: "vertical"
@@ -97,7 +106,7 @@
                 on_release:
                     app.root.cria_popup_aviso(x ="Em desenvolvimento.")
 
-        
+
             Button:
                 text:"CONFIGURE ALL PATHS"
                 on_release:
@@ -111,7 +120,7 @@
 
         BoxCor_1:
             padding:10
-            spacing:05
+            spacing:.05
             size_hint_y:.1
             orientation: "horizontal"
 
@@ -163,6 +172,7 @@
                     app.root.cria_popup_senha(x ="Em desenvolvimento.")
 
 
+
 BoxLayout
     orientation:"vertical"
 
@@ -182,35 +192,16 @@ BoxLayout
     Button:
 
 
-
 <Lb_space@Label>:
     size_hint_y:.1
-    #texture_size: self.size
-    #text_size: self.texture_size
     color:hex("0a2e8")
     font_size:"10dp"
-    #canvas.before:
-    #    Color:
-    #        rgba: hex(cor_azul)
-    #    Rectangle:
-    #        pos: self.pos
-    #        size: self.size
-
-
 
 
 <Lb_1@Label>:
-    #size_hint_y:.07
     texture_size: self.size
     text_size: self.texture_size
     color:hex("ffffff")
-    #font_size:"10dp"
-    #canvas.before:
-    #    Color:
-    #        rgba: hex("ffffff")
-    #    Rectangle:
-    #        pos: self.pos
-    #        size: self.size
 
 
 

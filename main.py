@@ -10,7 +10,7 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 import pexpect
-
+from platform import python_version
 
 
 class CreateKeystore():
@@ -146,46 +146,65 @@ class Main(ScreenManager):
     def __init__(self, **kwargs):
         super(Main, self).__init__(**kwargs)
 
+        self.lancador = Lanca()
+
 
     def checa_key(self,tip, name, path):
-
-        self.m = Lanca()
+        """
+        function just calls external class and checks if file exists
+        :param tip: dir or file
+        :param name: name file or = not_file
+        :param path: path
+        :return:
+        """
         self.x_1 = name + ".keystore"
         self.x_5 = path
 
-        # verifica se key já existe no diretorio
-        if self.m.check_file_exists("file", self.x_1, self.x_5) == True:
+        if self.lancador.check_file_exists("file", self.x_1, self.x_5) == True:
             return True
 
-
-        # chama classe externa
-        elif self.m.check_file_exists("file", self.x_1, self.x_5) == False:
+        elif self.lancador.check_file_exists("file", self.x_1, self.x_5) == False:
             return False
 
 
-
-    def create_key(self, x, y):
+    def create_apk(self, type , path_apk, name_apk, data_key):
         """
-        recebe dados de popup_key.kv
-        x = ['aliasname', 'namekey', 'stor183590', 'key183590', '14000', '/home/kivy/Desktop/']
-        y = ['ailton', 'orgkivy', 'uniao kivy', 'sao paulo', 'sao paulo', 'br']
-        envia listas com dados da keystore
+        :param type: debug, release, deploy run, clean
+        :param path_apk: /home/kivy/Desktop/helloword/bin/
+        :param name_apk:
+
+        :param data_key: ['aliasname', 'namekey', 'stor183590', 'key183590', '14000', '/home/kivy/Desktop/']
+
+        :return:
         """
-        self.m = Lanca()
-        self.x_1 = x[1]+".keystore"
-        self.x_5 = x[5]
+        self.type_apk = type
+        self.path_apk = path_apk
+        self.name_apk = name_apk
+        self.data_key = data_key
 
 
-        #verifica se key já existe no diretorio
-        if self.m.check_file_exists("file", self.x_1, self.x_5  ) ==True:
-            print ("arquivo ja existe")
+        os.system("cp -a ./apktool/apktool.jar /usr/local/bin")
+        os.system("cp -a ./apktool/apktool /usr/local/bin")
+        os.system("cd /usr/local/bin; chmod +x apktool")
+        os.system("cd /usr/local/bin; chmod +x apktool.jar")
+        os.system("cd " + self.path_apk +"; " + "apktool d " + self.name_apk)
+        os.system("cd " + self.path_apk + "; " + "apktool b " + "myapp-0.1-release-unsigned")
+        os.system("jarsigner -sigalg SHA1withRSA -digestalg SHA1  -signedjar " +  "rhproject -storepass 183590 -keypass 183590 -keystore C:\keystores\keystore.keystore C:\keystores\myapp-0.1-release-unsigned.apk rhproject")
 
 
-        #chama classe externa
-        elif self.m.check_file_exists("file", self.x_1, self.x_5  ) ==False:
-            self.m = Lanca()
-            self.m.create_keystore(x , y)
-            #print (self.m.create_keystore(x, y))
+
+
+    def create_key(self, key_data, personal_data):
+        """
+        call external class to create keystore
+        :param x:['aliasname', 'namekey', 'stor183590', 'key183590', '14000', '/home/kivy/Desktop/']
+        :param y:
+        :return:['ailton', 'orgkivy', 'uniao kivy', 'sao paulo', 'sao paulo', 'br']
+        """
+        self.key_data = key_data
+        self.personal_data = personal_data
+
+        self.lancador.create_keystore(self.key_data , self.personal_data)
 
 
     def cria_popup_senha(self,x):
@@ -236,19 +255,7 @@ class Main(ScreenManager):
         self.popup_senha.open()
 
 
-    def create_apk(self, x ,y):
-        """
-        :param x: debug, release, deploy run, clean
-        :param y: path_apkn = /home/kivy/Desktop/helloword/bin/
-        :return:
-        """
 
-        self.type_apk = x
-        os.system("cp -a ./apktool/apktool.jar /usr/local/bin")
-        os.system("cp -a ./apktool/apktool /usr/local/bin")
-        os.system("cd /usr/local/bin; chmod +x apktool")
-        os.system("cd /usr/local/bin; chmod +x apktool.jar")
-        os.system("cd" + y +"; apktool d myapp-0.1-release-unsigned.apk")
 
 
     def pop_dism(self, x):
@@ -265,16 +272,21 @@ class Main(ScreenManager):
 
 #screen
 
+#SCREEN
+
 
     def create_keystore(self):
         self.current = 'create_keystore'
 
-#screen
+#SCREEN
     def menu(self):
         self.current = 'menu'
 
 
 class MainApp(App):
+
+
+    python_version = StringProperty(str(python_version()))
 
     #DADOS KEYSTORE
     alias = StringProperty("aliasname")
@@ -307,6 +319,9 @@ class MainApp(App):
 
     #parametro cor
     par_3 = StringProperty("ffffff")
+
+    #nome do apk
+    apk_name = StringProperty("myapp-0.1-release-unsigned.apk")
 
 
     par_creatkey = ListProperty()
