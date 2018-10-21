@@ -68,22 +68,46 @@ class ManipulaTxt():
                 self.cria_arquivo_line(line, x)
 
 
-    def manipula_xml(self):
-        with open('AndroidManifest.xml', "r") as self.f:
+    def manipula_xml(self, x, file_origin):
+        """
+
+        :param x: arqquivo a ser alterado
+        :return:
+        """
+        #self.cria_arquivo_vazio("55.xml")
+        with open(x, "r") as self.f:
+
             for line in self.f:
-                if line.replace("platformBuildVersionCode=19","platformBuildVersionCode=28" ):
-                    print (line)
+                lm = str(line)
+                #if 'platformBuildVersionCode="19"' in lm:
+                #    print("axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxaaa"+line)
+                #
+                ##else:
+                    #print(line)
+                
+                m= (lm.replace('platformBuildVersionCode="19"' , 'platformBuildVersionCode="28"'))
+                self.cria_arquivo_line(m, file_origin)
+
+                #
+                #    self.le_line_cria("55.xml","AndroidManifest.xml")
+                #
+                #elif
 
 
+                
+                
 
-ManipulaTxt().cria_arquivo_vazio("novo.yml")
-ManipulaTxt().cria_arquivo_vazio("3.txt")
+#ManipulaTxt().manipula_xml("AndroidManifest.xml")
+ 
 
-
-ManipulaTxt().le_line_cria('apktool.yml', '3.txt')
-ManipulaTxt().get_dat("novo.yml")
-
-ManipulaTxt().cria_arquivo_vazio("novo.xml")
-ManipulaTxt().le_line_cria('AndroidManifest.xml', 'novo.xml')
-
+#ManipulaTxt().cria_arquivo_vazio("novo.yml")
+#ManipulaTxt().cria_arquivo_vazio("3.txt")
+#
+#
+#ManipulaTxt().le_line_cria('apktool.yml', '3.txt')
+#ManipulaTxt().get_dat("novo.yml")
+#
+#ManipulaTxt().cria_arquivo_vazio("novo.xml")
+#ManipulaTxt().le_line_cria('AndroidManifest.xml', 'novo.xml')
+#
 

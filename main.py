@@ -188,6 +188,10 @@ class Main(ScreenManager):
         self.path_apk = path_apk
         self.name_apk = name_apk
         self.data_key = data_key
+        self.name_apk_2 = self.name_apk.replace(".apk","" )
+        print(self.name_apk_2)
+        print((self.name_apk))
+
 
 
         self.signature_apk = ("jarsigner -sigalg SHA1withRSA -digestalg SHA1  -signedjar " +
@@ -195,7 +199,7 @@ class Main(ScreenManager):
                               self.data_key[3] + " -keystore " + self.data_key[5] + self.data_key[1] +
                               ".keystore" + " " + self.path_apk + self.name_apk + " " + self.data_key[0])
 
-        print(self.signature_apk)
+        #print(self.signature_apk)
 
         #copia apktool para pasta sistema
         os.system("cp -a ./apktool/apktool.jar /usr/local/bin")
@@ -209,14 +213,22 @@ class Main(ScreenManager):
         os.system("cd " + self.path_apk +"; " + "apktool d " + self.name_apk)
 
 
-        self.text.cria_arquivo_vazio("temporary.yml")
+        self.text.cria_arquivo_vazio("apktool.yml")
         self.text.cria_arquivo_vazio("AndroidManifest.xml")
 
-        print("função para alterar arquivos")
+        self.text.cria_arquivo_vazio("AndroidManifest.xml")
 
+
+        self.text.manipula_xml( self.path_apk + self.name_apk_2 + "/AndroidManifest.xml", "AndroidManifest.xml")
+        #print("~" + self.path_apk + self.data_key[0] + "/AndroidManifest.xml")
+
+
+
+        #print("função para alterar arquivos")
+        #
         os.system("cd " + self.path_apk + "; " + "apktool b " + "myapp-0.1-release-unsigned")
-
-        print("função para alterar arquivos")
+        #
+        #print("função para alterar arquivos")
 
 
 
@@ -228,7 +240,7 @@ class Main(ScreenManager):
             print("passou")
 
         self.zipalign = ("zipalign -v 4 " + self.path_apk + self.data_key[0] + " " + self.path_apk + self.data_key[0] +"optimized.apk")
-        #print(m)
+
 
         os.system(self.zipalign)
 
