@@ -11,6 +11,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 import pexpect
 from platform import python_version
+from sub_text import ManipulaTxt
 
 
 class CreateKeystore():
@@ -147,6 +148,7 @@ class Main(ScreenManager):
         super(Main, self).__init__(**kwargs)
 
         self.lancador = Lanca()
+        self.text = ManipulaTxt()
 
 
     def checa_key(self,tip, name, path):
@@ -169,6 +171,11 @@ class Main(ScreenManager):
 
     def create_apk(self, type , path_apk, name_apk, data_key):
         """
+        jarsigner -sigalg SHA1withRSA -digestalg SHA1
+        -signedjar aliasname -storepass 183590 -keypass 183590
+        -keystore /home/kivy/Desktop/helloword/keystores/keynamedd.keystore
+        /home/kivy/Desktop/helloword/bin/myapp-0.1-release-unsigned.apk aliasname
+
         :param type: debug, release, deploy run, clean
         :param path_apk: /home/kivy/Desktop/helloword/bin/
         :param name_apk:
@@ -183,13 +190,48 @@ class Main(ScreenManager):
         self.data_key = data_key
 
 
+        self.signature_apk = ("jarsigner -sigalg SHA1withRSA -digestalg SHA1  -signedjar " +
+                              self.data_key[0] + " -storepass " + self.data_key[2] + " -keypass " +
+                              self.data_key[3] + " -keystore " + self.data_key[5] + self.data_key[1] +
+                              ".keystore" + " " + self.path_apk + self.name_apk + " " + self.data_key[0])
+
+        print(self.signature_apk)
+
+        #copia apktool para pasta sistema
         os.system("cp -a ./apktool/apktool.jar /usr/local/bin")
         os.system("cp -a ./apktool/apktool /usr/local/bin")
+
+        #transforma apktool em executavel
         os.system("cd /usr/local/bin; chmod +x apktool")
         os.system("cd /usr/local/bin; chmod +x apktool.jar")
+
+        #executa comandos para empacotar e desempacotar
         os.system("cd " + self.path_apk +"; " + "apktool d " + self.name_apk)
+
+
+        self.text.cria_arquivo_vazio("temporary.yml")
+        self.text.cria_arquivo_vazio("AndroidManifest.xml")
+
+        print("função para alterar arquivos")
+
         os.system("cd " + self.path_apk + "; " + "apktool b " + "myapp-0.1-release-unsigned")
-        os.system("jarsigner -sigalg SHA1withRSA -digestalg SHA1  -signedjar " +  "rhproject -storepass 183590 -keypass 183590 -keystore C:\keystores\keystore.keystore C:\keystores\myapp-0.1-release-unsigned.apk rhproject")
+
+        print("função para alterar arquivos")
+
+
+
+
+        os.system("cd " + self.path_apk + "; " +self.signature_apk)
+        try:
+            os.system("cd /home/kivy/.buildozer/android/platform/android-sdk-23/build-tools/23.0.1/; apt-get install zipalign")
+        except:
+            print("passou")
+
+        self.zipalign = ("zipalign -v 4 " + self.path_apk + self.data_key[0] + " " + self.path_apk + self.data_key[0] +"optimized.apk")
+        #print(m)
+
+        os.system(self.zipalign)
+
 
 
 
@@ -290,7 +332,7 @@ class MainApp(App):
 
     #DADOS KEYSTORE
     alias = StringProperty("aliasname")
-    name_key = StringProperty("")
+    name_key = StringProperty("keyname")
     storepass = StringProperty("183590")
     keypass = StringProperty("183590")
     validity = StringProperty("10000")
@@ -321,7 +363,7 @@ class MainApp(App):
     par_3 = StringProperty("ffffff")
 
     #nome do apk
-    apk_name = StringProperty("myapp-0.1-release-unsigned.apk")
+    apk_name = StringProperty("myapp-0.1-release-unsigned.apk")    
 
 
     par_creatkey = ListProperty()

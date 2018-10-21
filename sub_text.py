@@ -12,7 +12,7 @@ class ManipulaTxt():
         """
         with open("apktool.yml", "r") as self.f:
             for line in self.f:
-                print line
+                print (line)
 
 
     def cria_arquivo_vazio(self, x):
@@ -72,12 +72,14 @@ class ManipulaTxt():
         with open('AndroidManifest.xml', "r") as self.f:
             for line in self.f:
                 if line.replace("platformBuildVersionCode=19","platformBuildVersionCode=28" ):
-                    print line
+                    print (line)
 
 
 
 ManipulaTxt().cria_arquivo_vazio("novo.yml")
 ManipulaTxt().cria_arquivo_vazio("3.txt")
+
+
 ManipulaTxt().le_line_cria('apktool.yml', '3.txt')
 ManipulaTxt().get_dat("novo.yml")
 
