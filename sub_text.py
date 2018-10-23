@@ -2,17 +2,47 @@
 
 
 class ManipulaTxt():
+
     def __init__(self):
         pass
+
+
+    def le_line_script(self, x, y):
+        """
+        função para script.py
+        :param x: name file
+        :param y: name_data
+        :return: le linha do arquivo e transforma em lista com split
+        e retorna valor do segundo item como parametro
+
+        """
+        valoreschave = []
+
+        with open(x, "r") as self.f:
+
+            for line in self.f:
+                divide = line.split("=")
+                if divide[0] == y:
+
+                    valoreschave.append(divide[1].replace("\n",""))
+                    return divide[1].replace("\n","")
+
+
+            #print(valoreschave)
+
+
 
     def le_line(self, x):
         """
         :param x: nome do arquivo a ser lido
         :return: print linhas do arquivo
         """
-        with open("apktool.yml", "r") as self.f:
+        with open(x, "r") as self.f:
+
+
             for line in self.f:
-                print (line)
+                print(line)
+                return line
 
 
     def cria_arquivo_vazio(self, x):
@@ -68,31 +98,22 @@ class ManipulaTxt():
                 self.cria_arquivo_line(line, x)
 
 
-    def manipula_xml(self, x, file_origin):
+    def manipula_xml(self, x, file_origin, alterar_de, alterar_para):
         """
 
-        :param x: arqquivo a ser alterado
+        :param x:  arqquivo a ser alterado
+        :param file_origin: arquivo originario, local e nome
+        :param alterar:   dados a ser alterado, de para
         :return:
         """
-        #self.cria_arquivo_vazio("55.xml")
+
         with open(x, "r") as self.f:
 
             for line in self.f:
                 lm = str(line)
-                #if 'platformBuildVersionCode="19"' in lm:
-                #    print("axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxaaa"+line)
-                #
-                ##else:
-                    #print(line)
-                
-                m= (lm.replace('platformBuildVersionCode="19"' , 'platformBuildVersionCode="28"'))
+
+                m= (lm.replace(alterar_de , alterar_para))
                 self.cria_arquivo_line(m, file_origin)
-
-                #
-                #    self.le_line_cria("55.xml","AndroidManifest.xml")
-                #
-                #elif
-
 
                 
                 
