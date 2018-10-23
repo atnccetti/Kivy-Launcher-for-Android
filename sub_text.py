@@ -23,8 +23,9 @@ class ManipulaTxt():
             for line in self.f:
                 divide = line.split("=")
                 if divide[0] == y:
+                    print(divide[1])
 
-                    valoreschave.append(divide[1].replace("\n",""))
+                    #valoreschave.append(divide[1].replace("\n",""))
                     return divide[1].replace("\n","")
 
 

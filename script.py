@@ -27,6 +27,15 @@ class Launcher():
         self.validity = self.text.le_line_script(self.file,"validity")
         self.keypath = self.text.le_line_script(self.file,"path_key")
 
+        self.api = self.text.le_line_script(self.file,"api")
+
+        self.name = self.text.le_line_script(self.file, "name")
+        self.organizational_unit = self.text.le_line_script(self.file, "organizational_unit")
+        self.your_organization = self.text.le_line_script(self.file, "your_organization")
+        self.city = self.text.le_line_script(self.file, "city")
+        self.estate = self.text.le_line_script(self.file, "estate")
+        self.nation = self.text.le_line_script(self.file, "nation")
+
 
         self.data_key = [self.alias,
                          self.name_key,
@@ -39,37 +48,39 @@ class Launcher():
 
 
 
-
-
         self.key = "keytool -genkey -v -keystore "+self.keypath+self.name_key+".keystore -alias " + self.alias + " -storepass " + self.storepass +" -keypass " + self.keypass + " -keyalg RSA -validity " + self.validity
 
 
         print("\nTentando criar a keystore....\n")
 
 
+
         try:
             self.p = pexpect.spawn(self.key, timeout=10)
             self.p.expect('What.*?')
-            self.p.sendline("dddddddd")
+            self.p.sendline(self.name)
             self.p.expect('What.*?')
-            self.p.sendline("cccc")
+            self.p.sendline(self.organizational_unit)
             self.p.expect('What.*?')
-            self.p.sendline("wdfsdvfsd")
+            self.p.sendline(self.your_organization)
             self.p.expect('What.*?')
-            self.p.sendline("cccc")
+            self.p.sendline(self.city)
             self.p.expect('What.*?')
-            self.p.sendline("ss")
+            self.p.sendline(self.estate)
             self.p.expect('What.*?')
-            self.p.sendline("ss")
+            self.p.sendline(self.nation)
             self.p.expect('Is.*?:')
             self.p.sendline("yes")
             self.p.expect(pexpect.EOF)
-            print (self.p.before)
+            #print (self.p.before)
+            self.create_apk(self.data_key)
 
-            self.create_apk(self.data_key)
         except:
-            print("\nkeystore já existe no diretório....\n")
+            print("CHAVE JÁ EXISTE NO DIRETORIO")
             self.create_apk(self.data_key)
+
+  
+  
 
 
 
@@ -95,7 +106,8 @@ class Launcher():
         self.name_apk = self.text.le_line_script(self.file,"name_apk")
         self.data_key = data_key
         self.name_apk_2 = self.name_apk.replace(".apk", "")
-        
+
+
 
         # copia apktool para pasta sistema
         print("\nCopiando apktool para /usr/local/bin ....\n")
@@ -118,7 +130,7 @@ class Launcher():
             os.system("rm -R " + self.path_apk + self.name_apk_2)
         except:
             print("\nNão há projeto anterior....\n")
-            pass
+
 
 
 
@@ -140,9 +152,10 @@ class Launcher():
         print("\n\nImportando dados do xml e yml original e alterando informações de Api....\n\n")
         try:
             self.text.manipula_xml(self.path_apk + self.name_apk_2 + "/AndroidManifest.xml", "AndroidManifest.xml",
-                                   'platformBuildVersionCode="19"', 'platformBuildVersionCode="26"')
+                                   'platformBuildVersionCode="19"', 'platformBuildVersionCode="' + self.api +'"')
+
             self.text.manipula_xml(self.path_apk + self.name_apk_2 + "/apktool.yml", "apktool.yml",
-                               "targetSdkVersion: '19'", "targetSdkVersion: '26'")
+                               "targetSdkVersion: '19'", "targetSdkVersion: '"+ self.api +"'")
         except:
             print("\nAlgo deu errado, verifique se não há erros no par_release.txt....\n")
         print("\nArquivos alterados com sucesso....\n")
@@ -189,15 +202,15 @@ class Launcher():
             os.system("rm - r " + self.path_apk + self.data_key[0] + "optimized_for_playstore.apk")
         except:
             print("\nNão existe arquivo para excluir....\n")
-        print("\nArquivo exculido com sucesso....\n")
+        
 
 
 
         # apaga apk releaase do buidozer
-        #os.system("rm - r " + self.path_apk + self.name_apk)
+        os.system("rm - r " + self.path_apk + self.name_apk)
 
         # copia arquivo alterado para pasta do apk
-        os.system("cp -a " + self.path_apk + self.name_apk_2+"/dist/" + self.name_apk + self.path_apk)
+        os.system("cp -a " + self.path_apk + self.name_apk_2+"/dist/" + self.name_apk +" " + self.path_apk)
         #
         # assina apk
         self.signature_apk = ("jarsigner -sigalg SHA1withRSA -digestalg SHA1  -signedjar " +
@@ -210,7 +223,7 @@ class Launcher():
 
         self.zipalign = (
             "zipalign -v 4 " + self.path_apk + self.data_key[0] + " " + self.path_apk + self.data_key[
-                0] + "optimized.apk")
+                0] + "optimized_for_playstore.apk")
 
 
         try:

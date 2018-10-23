@@ -1,6 +1,8 @@
 #KEYSTORE#
+#dados da keystore
 
-aliasname=huhap
+
+aliasname=nuhap
 
 keyname=nuhapkey
 
@@ -10,21 +12,38 @@ keypass=202020
 
 validity=14000
 
-path_key=/home/kivy/Desktop/helloword/keystores/
+path_key=/home/kivy/Desktop/nuhap/keystores/
 
-name:ailton andreuccetti
-empresa:tutsmoviment
-organizacao:Tutsmov
-cidade:sao paulo
-estado:sao paulo
-pais:BR 
+name=jonas
+
+organizational_unit=tutsmoviment
+
+your_organization=Tutsmov
+
+city=sao paulo
+
+estate=sao paulo
+
+nation=BR
+
+
+
+
+
 
 #APP#
 
 #local do apk
-path_apk=/home/kivy/Desktop/helloword/bin/
+path_apk=/home/kivy/Desktop/nuhap/bin/
 
 #nome do aplicativo release
-name_apk=myapp-0.1-release-unsigned.apk
+name_apk=nuhap-1.0-release-unsigned.apk
 
 #path_zipalign=/home/kivy/.buildozer/android/platform/android-sdk-23/build-tools/23.0.1/
+
+
+
+
+#API
+
+api=27
