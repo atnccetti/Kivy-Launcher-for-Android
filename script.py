@@ -1,8 +1,6 @@
 # coding=utf-8
 import os
-
 import pexpect
-
 from sub_text import ManipulaTxt
 
 
@@ -224,8 +222,6 @@ class Launcher():
             os.system(
                 "cd /home/kivy/.buildozer/android/platform/android-sdk-23/build-tools/23.0.1/; apt-get install zipalign")
             os.system(self.zipalign)
-
-
 
 
 
