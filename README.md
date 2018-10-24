@@ -1,10 +1,13 @@
 # launcher Kivy for Android
 
-Launcher to include kivy Application in playstore, this application is in extremely beta phase, the documentation and comments are not yet fully in English, and the code is not improved, this project was done quickly to provide a temporary solution for kivy users who wish to include their application in the store, but can not because they have problems with Api 26-27-28, this software makes use of reverse engineering methods using Apktools to make inclusion possible.
+Launcher to include kivy Application in playstore, this application is in extremely beta phase, the documentation and comments are not yet fully in English, and the code is not improved, this project was done quickly to provide a temporary solution for kivy users who wish to include their application in the store, but can not because they have problems with Api's 26-27-28, this software makes use of reverse engineering methods using Apktools to make inclusion possible.
 (Sorry for my weak English)
 
 
 -"cd launcherKivyforAndroid" - "sudo python script.py"
+
+
+-To run this application it is necessary that you already have the release version of the apk, it is not necessary to sign, nor add the environment variable of the keystore to the path, we do it for you.
 
 -After editing par_release.txt, inside the directory "launcherKivyforAndroid" execute the command "sudo python script.py".
 
@@ -22,5 +25,10 @@ Launcher to include kivy Application in playstore, this application is in extrem
 
 
  contributors (brut.all, iBotPeaches and JesusFreke)=apktool
+ 
+ 
+ 
+  beta-00.1
 
+(Sorry for my weak English, I accept contributions to improve, and complete the translation of comments to English.)
 

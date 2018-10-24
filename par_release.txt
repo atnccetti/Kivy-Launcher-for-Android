@@ -27,14 +27,20 @@ nation=BR
 
 
 
-#APP#
 
+
+#APP#
 
 path_apk=/home/kivy/Desktop/nuhap/bin/
 
 name_apk=nuhap-1.0-release-unsigned.apk
 
 path_zipalign=/home/kivy/.buildozer/android/platform/android-sdk-23/build-tools/23.0.1/
+
+
+
+
+
 
 
 #API#

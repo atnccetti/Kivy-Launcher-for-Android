@@ -9,6 +9,7 @@ class Launcher():
     def __init__(self):
         self.file = "par_release.txt"
 
+
     def create_keystore(self, ):
         """recebe parametros e monta key conforme dados recebidos
            x = ['aliasname', 'namekey', 'stor183590', 'key183590', '14000', '/home/kivy/Desktop/']
@@ -17,26 +18,20 @@ class Launcher():
 
         print("Iniciando criação da keystore....\n\n")
         self.text = ManipulaTxt()
-
         self.alias = self.text.le_line_script(self.file,"aliasname")
         self.name_key = self.text.le_line_script(self.file,"keyname")
         self.storepass = self.text.le_line_script(self.file,"keystore")
         self.keypass = self.text.le_line_script(self.file,"keypass")
         self.validity = self.text.le_line_script(self.file,"validity")
         self.keypath = self.text.le_line_script(self.file,"path_key")
-
         self.api = self.text.le_line_script(self.file,"api")
-
         self.name = self.text.le_line_script(self.file, "name")
         self.organizational_unit = self.text.le_line_script(self.file, "organizational_unit")
         self.your_organization = self.text.le_line_script(self.file, "your_organization")
         self.city = self.text.le_line_script(self.file, "city")
         self.estate = self.text.le_line_script(self.file, "estate")
         self.nation = self.text.le_line_script(self.file, "nation")
-
         self.path_zipalign = self.text.le_line_script(self.file, "zipalign")
-
-
         self.data_key = [self.alias,
                          self.name_key,
                          self.storepass,
@@ -45,15 +40,8 @@ class Launcher():
                          self.keypath
                          ]
 
-
-
-
         self.key = "keytool -genkey -v -keystore "+self.keypath+self.name_key+".keystore -alias " + self.alias + " -storepass " + self.storepass +" -keypass " + self.keypass + " -keyalg RSA -validity " + self.validity
-
-
         print("\nTentando criar a keystore....\n")
-
-
 
         try:
             self.p = pexpect.spawn(self.key, timeout=10)
@@ -102,8 +90,6 @@ class Launcher():
         self.data_key = data_key
         self.name_apk_2 = self.name_apk.replace(".apk", "")
 
-
-
         # copia apktool para pasta sistema
         print("\nCopiando apktool para /usr/local/bin ....\n")
 
@@ -114,9 +100,9 @@ class Launcher():
         # transforma apktool em executavel
             os.system("cd /usr/local/bin; chmod +x apktool")
             os.system("cd /usr/local/bin; chmod +x apktool.jar")
+
         except:
             print("\nAlgo deu errado...\n")
-
 
 
         # exclui projeto anterior
@@ -127,12 +113,9 @@ class Launcher():
             print("\nNão há projeto anterior....\n")
 
 
-
-
         # executa comandos para desempacotar apk
         print("\n\nIniciando desempacotamento de apk....\n\n")
         os.system("cd " + self.path_apk + "; " + "apktool d " + self.name_apk)
-
 
 
         # cria arquivos de confoguração xml e yml para ser trabalhado
@@ -151,10 +134,10 @@ class Launcher():
 
             self.text.manipula_xml(self.path_apk + self.name_apk_2 + "/apktool.yml", "apktool.yml",
                                "targetSdkVersion: '19'", "targetSdkVersion: '"+ self.api +"'")
+
         except:
             print("\nAlgo deu errado, verifique se não há erros no par_release.txt....\n")
         print("\nArquivos alterados com sucesso....\n")
-
 
 
         # apaga xml yml obsoletos
@@ -169,17 +152,15 @@ class Launcher():
 
 
 
-
         # copia arquivos criados para pasta do apk
         print("\nINICIANDO A TRANSFERENCIA DE XML E YML MODIFICADOS....\n")
         try:
             os.system("cp -a ./AndroidManifest.xml " + self.path_apk + self.name_apk_2)
             os.system("cp -a ./apktool.yml " + self.path_apk + self.name_apk_2)
+
         except:
             print("\nAlgo deu errado, verifique se não há erros no par_release.txt....\n")
         print("\nArquivos transferidos com sucesso....\n")
-
-
 
 
         # reempacota app
@@ -199,9 +180,9 @@ class Launcher():
             print("\nNão existe arquivo para excluir....\n")
 
 
-
         # apaga apk releaase do buidozer
         os.system("rm - r " + self.path_apk + self.name_apk)
+
 
         # copia arquivo alterado para pasta do apk
         os.system("cp -a " + self.path_apk + self.name_apk_2+"/dist/" + self.name_apk +" " + self.path_apk)
