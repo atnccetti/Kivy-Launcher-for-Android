@@ -6,7 +6,7 @@ Launcher to include kivy Application in playstore, this application is in extrem
 
 -"cd launcherKivyforAndroid" - "sudo python script.py"
 
-- This application creates the keystore, applies the keystore with jarsigner signing the application, relativizes the deployment of new api parameters, and optimizes the application with zipalign providing the apk with final optimized ready for the store.
+-This application creates the keystore, applies the keystore with jarsigner signing the application, relativizes the deployment of new api parameters, and optimizes the application with zipalign providing the apk with final optimized ready for the store.
 
 -To run this application it is necessary that you already have the release version of the apk, it is not necessary to sign, nor add the environment variable of the keystore to the path, we do it for you.
 
