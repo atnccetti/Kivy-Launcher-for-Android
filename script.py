@@ -4,12 +4,10 @@ import pexpect
 from sub_text import ManipulaTxt
 
 
-
 class Launcher():
 
     def __init__(self):
         self.file = "par_release.txt"
-
 
     def create_keystore(self, ):
         """recebe parametros e monta key conforme dados recebidos
@@ -80,11 +78,6 @@ class Launcher():
         except:
             print("CHAVE JÁ EXISTE NO DIRETORIO")
             self.create_apk(self.data_key)
-
-  
-  
-
-
 
 
     def create_apk(self, data_key):
@@ -204,7 +197,6 @@ class Launcher():
             os.system("rm - r " + self.path_apk + self.data_key[0] + "optimized_for_playstore.apk")
         except:
             print("\nNão existe arquivo para excluir....\n")
-        
 
 
 
@@ -230,17 +222,11 @@ class Launcher():
 
         try:
             os.system(self.zipalign)
-
-
-
         except:
             os.system(
-                "cd /home/kivy/.buildozer/android/platform/android-sdk-23/build-tools/23.0.1/; apt-get install zipalign")
+                self.path_zipalign+"; apt-get install zipalign")
             os.system(self.zipalign)
 
 
-
-
 lauc = Launcher()
-
 lauc.create_keystore()
