@@ -4,6 +4,12 @@ Launcher to include kivy Application in playstore, this application is in extrem
 (Sorry for my weak English)
 
 
+-"cd launcherKivyforAndroid" - "sudo python script.py"
+
+-After editing par_release.txt, inside the directory "launcherKivyforAndroid" execute the command "sudo python script.py".
+
+-Download the project package, and run in any directory.
+
 -Execute script in python 3.5, 3.6 or 3.7 (I'm working on compatibility with python 2
 
 -Configure the file par_release.txt.

@@ -1,6 +1,4 @@
 #KEYSTORE#
-#dados da keystore
-
 
 aliasname=nuhap
 
@@ -29,21 +27,16 @@ nation=BR
 
 
 
-
-
 #APP#
 
-#local do apk
+
 path_apk=/home/kivy/Desktop/nuhap/bin/
 
-#nome do aplicativo release
 name_apk=nuhap-1.0-release-unsigned.apk
 
-#path_zipalign=/home/kivy/.buildozer/android/platform/android-sdk-23/build-tools/23.0.1/
+path_zipalign=/home/kivy/.buildozer/android/platform/android-sdk-23/build-tools/23.0.1/
 
 
-
-
-#API
+#API#
 
 api=27

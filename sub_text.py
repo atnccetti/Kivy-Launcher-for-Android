@@ -14,23 +14,12 @@ class ManipulaTxt():
         :param y: name_data
         :return: le linha do arquivo e transforma em lista com split
         e retorna valor do segundo item como parametro
-
-        """
-        valoreschave = []
-
+        """     
         with open(x, "r") as self.f:
-
             for line in self.f:
                 divide = line.split("=")
                 if divide[0] == y:
-                    print(divide[1])
-
-                    #valoreschave.append(divide[1].replace("\n",""))
                     return divide[1].replace("\n","")
-
-
-            #print(valoreschave)
-
 
 
     def le_line(self, x):
@@ -39,8 +28,6 @@ class ManipulaTxt():
         :return: print linhas do arquivo
         """
         with open(x, "r") as self.f:
-
-
             for line in self.f:
                 print(line)
                 return line
@@ -88,48 +75,27 @@ class ManipulaTxt():
         e adiciona no documento escolhido por parametro
         x = nome do arquivo que linha será adicionada
         """
-        self.f = open('3.txt', 'r')
-        for line in self.f:
-            if line[0:10] == "  minSdkVe":
-                self.cria_arquivo_line("  minSdkVersion: '19'\n", x)
+        with open('3.txt', 'r') as self.f:
+            for line in self.f:
+                if line[0:10] == "  minSdkVe":
+                    self.cria_arquivo_line("  minSdkVersion: '19'\n", x)
 
-            elif line[0:10] == "  targetSd":
-                self.cria_arquivo_line("  targetSdkVersion: '29'\n", x)
-            else:
-                self.cria_arquivo_line(line, x)
+                elif line[0:10] == "  targetSd":
+                    self.cria_arquivo_line("  targetSdkVersion: '29'\n", x)
+                else:
+                    self.cria_arquivo_line(line, x)
 
 
     def manipula_xml(self, x, file_origin, alterar_de, alterar_para):
         """
-
         :param x:  arqquivo a ser alterado
         :param file_origin: arquivo originario, local e nome
         :param alterar:   dados a ser alterado, de para
         :return:
         """
-
         with open(x, "r") as self.f:
-
             for line in self.f:
                 lm = str(line)
-
                 m= (lm.replace(alterar_de , alterar_para))
                 self.cria_arquivo_line(m, file_origin)
-
-                
-                
-
-#ManipulaTxt().manipula_xml("AndroidManifest.xml")
- 
-
-#ManipulaTxt().cria_arquivo_vazio("novo.yml")
-#ManipulaTxt().cria_arquivo_vazio("3.txt")
-#
-#
-#ManipulaTxt().le_line_cria('apktool.yml', '3.txt')
-#ManipulaTxt().get_dat("novo.yml")
-#
-#ManipulaTxt().cria_arquivo_vazio("novo.xml")
-#ManipulaTxt().le_line_cria('AndroidManifest.xml', 'novo.xml')
-#
 

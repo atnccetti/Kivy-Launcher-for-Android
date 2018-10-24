@@ -36,6 +36,8 @@ class Launcher():
         self.estate = self.text.le_line_script(self.file, "estate")
         self.nation = self.text.le_line_script(self.file, "nation")
 
+        self.path_zipalign = self.text.le_line_script(self.file, "zipalign")
+
 
         self.data_key = [self.alias,
                          self.name_key,
