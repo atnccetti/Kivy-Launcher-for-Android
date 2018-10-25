@@ -10,7 +10,7 @@ class Launcher():
 
     def __init__(self):
         self.file = "par_release.txt"
-        
+
 
     def create_keystore(self, ):
         """
