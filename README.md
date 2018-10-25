@@ -29,7 +29,7 @@ Launcher to include kivy Application in playstore, this application is in extrem
  
  
  
-  beta-00.1
+  beta-00.2
 
 (Sorry for my weak English, I accept contributions to improve, and complete the translation of comments to English.)
 
