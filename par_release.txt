@@ -1,8 +1,8 @@
 #KEYSTORE#
 
-aliasname=nuhap
+aliasname=aliasname
 
-keyname=nuhapkey
+keyname=mynamepkey
 
 keystore=202020
 
@@ -10,9 +10,9 @@ keypass=202020
 
 validity=14000
 
-path_key=/home/kivy/Desktop/nuhap/keystores/
+path_key=/home/kivy/Desktop/helloword/keystores/
 
-name=jonas
+name=atnccetti 
 
 organizational_unit=tutsmoviment
 
