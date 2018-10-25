@@ -1,7 +1,6 @@
 # coding=utf-8
 import os
 import pexpect
-from sub_text import ManipulaTxt
 import time
 
 interval = 0.2
