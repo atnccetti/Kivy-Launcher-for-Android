@@ -59,12 +59,12 @@ class Launcher():
                    self.keypass + " -keyalg RSA -validity " + \
                    self.validity
 
-        if self.check_file_exists("file", self.name_key, self.keypath ) == True:
+        #if self.check_file_exists("file", self.name_key, self.keypath ) == True:
+        #
+        #    print("\n----KEY ALREADY EXIST IN THE BOARD OF DIRECTORS, MOVING ON----\n"
+        #          "----KEY JÁ EXISTE NI DIRETÓRIO, SEGUNDO EM FRENTE----\n")
 
-            print("\n----KEY ALREADY EXIST IN THE BOARD OF DIRECTORS, MOVING ON----\n"
-                  "----KEY JÁ EXISTE NI DIRETÓRIO, SEGUNDO EM FRENTE----\n")
-
-            time.sleep(interval)
+            #time.sleep(interval)
         try:
             self.p = pexpect.spawn(self.key, timeout=10)
             self.p.expect('What.*?')
@@ -90,6 +90,7 @@ class Launcher():
                   "----KEY JÁ EXISTE NI DIRETÓRIO, SEGUNDO EM FRENTE----\n")
             time.sleep(interval)
             self.create_apk(self.data_key)
+
 
     def create_apk(self, data_key):
         """
@@ -241,7 +242,6 @@ class Launcher():
               "----Futuramente haverá um gerenciador de versões\n \n")
 
 
-
     def check_file_exists(self, tip, name, path):
         """
         :param tip: dir or file
@@ -256,6 +256,7 @@ class Launcher():
             return True
         else:
             return False
+
 
     def le_line_script(self, x, y):
         """
@@ -284,6 +285,7 @@ class Launcher():
                 lm = str(line)
                 m= (lm.replace(alterar_de , alterar_para))
                 self.create_file_line(m, file_origin)
+
 
     def create_file_line(self, x, y):
         """
