@@ -3,7 +3,7 @@ import os
 import pexpect
 import time
 
-interval = 0.2
+interval = 1
 
 class Launcher():
 
@@ -59,12 +59,12 @@ class Launcher():
                    self.keypass + " -keyalg RSA -validity " + \
                    self.validity
 
-        #if self.check_file_exists("file", self.name_key, self.keypath ) == True:
-        #
-        #    print("\n----KEY ALREADY EXIST IN THE BOARD OF DIRECTORS, MOVING ON----\n"
-        #          "----KEY JÁ EXISTE NI DIRETÓRIO, SEGUNDO EM FRENTE----\n")
+        if self.check_file_exists("file", self.name_key, self.keypath ) == True:
 
-            #time.sleep(interval)
+            print("\n----KEY ALREADY EXIST IN THE BOARD OF DIRECTORS, MOVING ON----\n"
+                  "----KEY JÁ EXISTE NI DIRETÓRIO, SEGUNDO EM FRENTE----\n")
+
+            time.sleep(interval)
         try:
             self.p = pexpect.spawn(self.key, timeout=10)
             self.p.expect('What.*?')
